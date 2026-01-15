@@ -3,12 +3,15 @@ package org.example.jdbcdatenvisualisierung;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class JDBCController {
     @FXML
-    private Label welcomeText;
+    private BarChart barChart;
+    @FXML
+    private Label statusLabel;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    void initialize() {
+        // Initialisierungscode hier
+
     }
+
 }
