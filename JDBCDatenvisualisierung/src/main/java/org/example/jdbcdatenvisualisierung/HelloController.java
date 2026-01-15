@@ -2,16 +2,16 @@ package org.example.jdbcdatenvisualisierung;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.chart.BarChart;
 import java.sql.*;
 
-public class Country{
+public class Continent{
     String name;
-    string continent;
     int population;
 }
 
 
-public class JDBCController {
+public class JDBCController from ArrayList<Continent> {
     @FXML
     private BarChart barChart;
     @FXML
@@ -20,6 +20,7 @@ public class JDBCController {
 
     void initialize() {
         // Initialisierungscode hier
+        Continent continents = new Continent();
         String url = "jdbc:postgresql://xserv:5432/world2";
         String user = "reader";
         String password = "reader";
@@ -40,7 +41,9 @@ public class JDBCController {
 
             // 5. Process Results
             while (rs.next()) {
-                System.out.println(rs.getInt("id") + " " + rs.getString("name") + " " + rs.getInt("age"));
+                continents.add(new Continent());
+                continents.get(continents.size() - 1).name = rs.getString("continent");
+                continents.get(continents.size() - 1).population = rs.getInt("bevoelkerung");
             }
 
             // 6. Close resources
