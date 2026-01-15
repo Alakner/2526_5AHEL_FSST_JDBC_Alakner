@@ -2,6 +2,7 @@ package org.example.jdbcdatenvisualisierung;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import java.sql.*;
 
 public class JDBCController {
     @FXML
@@ -9,8 +10,39 @@ public class JDBCController {
     @FXML
     private Label statusLabel;
 
+
     void initialize() {
         // Initialisierungscode hier
+        String url = "jdbc:postgresql://xserv:5432/world2";
+        String user = "reader";
+        String password = "reader";
+
+        try {
+
+            // 1. Establish Connection
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            // 3. Create Statement
+            Statement stmt = con.createStatement();
+
+            // 4. Execute Query
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT country.continent, SUM(country.population) AS bevoelkerung\n" +
+                    "FROM country\n" +
+                    "GROUP BY country.continent;");
+
+            // 5. Process Results
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") + " " + rs.getString("name") + " " + rs.getInt("age"));
+            }
+
+            // 6. Close resources
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
