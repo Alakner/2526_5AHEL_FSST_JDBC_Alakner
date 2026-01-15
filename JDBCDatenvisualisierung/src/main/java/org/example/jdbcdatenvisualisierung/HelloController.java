@@ -5,13 +5,13 @@ import javafx.scene.control.Label;
 import javafx.scene.chart.BarChart;
 import java.sql.*;
 
-public class Continent{
+public class Continent from ArrayList<Continent>{
     String name;
     int population;
 }
 
 
-public class JDBCController from ArrayList<Continent> {
+public class JDBCController implements Initializable {
     @FXML
     private BarChart barChart;
     @FXML
@@ -53,7 +53,8 @@ public class JDBCController from ArrayList<Continent> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
+    new
 
 }
