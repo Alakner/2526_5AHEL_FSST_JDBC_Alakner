@@ -4,6 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import java.sql.*;
 
+public class Country{
+    String name;
+    string continent;
+    int population;
+}
+
+
 public class JDBCController {
     @FXML
     private BarChart barChart;
