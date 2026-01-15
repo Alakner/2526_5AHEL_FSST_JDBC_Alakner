@@ -1,4 +1,4 @@
-package main.java.org.example.jdbcdatenvisualisierung;
+package org.example.jdbcdatenvisualisierung;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
