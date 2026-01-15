@@ -5,6 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+
+
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import java.sql.*;
 
 
@@ -53,8 +59,18 @@ public class JDBCApplication extends Application {
 
 
         Axis continentAxis = new CategoryAxis();
-        Axis populationAxis = new CategoryAxis();
-        barChart = new BarChart();
+        Axis populationAxis = new NumberAxis();
+        BarChart barChart = new BarChart();
+        barChart.setTitle("Population by Continent");
+        continentAxis.setLabel("Continent");
+        populationAxis.setLabel("Population");
+
+        XYChart.Series dataSeries = new XYChart.Series();
+        for (Continent continent : continents) {
+            dataSeries.getData().add(new XYChart.Data(continent.name, continent.population));
+        }
+        barChart.getData().add(dataSeries);
+
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 400);
