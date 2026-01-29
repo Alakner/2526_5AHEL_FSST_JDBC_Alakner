@@ -11,8 +11,24 @@ import java.util.ArrayList;
 
 // TODO Wittner: Continent Klasse durch Methdoden ergänzen, um Datenkapselung zu verbessern
 class Continent {
-    String name;
-    double population;
+    private String name;
+    private double population;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(double population) {
+        this.population = population;
+    }
 }
 
 // TODO Wittner: Ermitteln Sie welche Kontinente in der Datenbank enthalten sind.
@@ -38,8 +54,8 @@ public class JDBCApplication extends Application {
 
             while (rs.next()) {
                 Continent c = new Continent();
-                c.name = rs.getString("continent");
-                c.population = rs.getDouble("bevoelkerung");
+                c.setName(rs.getString("continent"));
+                c.setPopulation(rs.getDouble("bevoelkerung"));
                 continents.add(c);
             }
 
@@ -57,9 +73,9 @@ public class JDBCApplication extends Application {
 
         XYChart.Series<String, Number> dataSeries1 = new XYChart.Series<>();
         for (Continent continent : continents) {
-            dataSeries1.getData().add(new XYChart.Data<>(continent.name, continent.population));
+            dataSeries1.getData().add(new XYChart.Data<>(continent.getName(), continent.getPopulation()));
         }
-        String [] continentNames = continents.stream().map(c -> c.name).toArray(String[]::new);
+        String [] continentNames = continents.stream().map(Continent::getName).toArray(String[]::new);
 
         FXMLLoader fxmlLoader = new FXMLLoader(JDBCApplication.class.getResource("jdbcview.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1500, 600);
