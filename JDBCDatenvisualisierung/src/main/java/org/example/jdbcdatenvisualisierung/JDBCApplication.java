@@ -9,10 +9,15 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
+// TODO Wittner: Continent Klasse durch Methdoden ergänzen, um Datenkapselung zu verbessern
 class Continent {
     String name;
     double population;
 }
+
+// TODO Wittner: Ermitteln Sie welche Kontinente in der Datenbank enthalten sind.
+//    erstellen Sie für jeden Kontinent eine Chceckbox in der GUI, mit der der Kontinent ein- und ausgeblendet werden kann.
+//    Stellen Sie im BarChart nur die Kontinente dar, die ausgewählt sind.
 
 public class JDBCApplication extends Application {
     @Override
