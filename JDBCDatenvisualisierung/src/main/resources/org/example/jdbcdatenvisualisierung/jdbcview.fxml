@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.jdbcdatenvisualisierung.JDBCController">
+    <children>
+        <BarChart fx:id="barChart" layoutX="10.0" layoutY="10.0" prefWidth="980.0" prefHeight="380.0">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" label="Continent" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" label="Population" />
+            </yAxis>
+        </BarChart>
+    </children>
+</AnchorPane>

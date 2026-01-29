@@ -4,9 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import java.io.IOException;
 import java.sql.*;
@@ -14,7 +11,7 @@ import java.util.ArrayList;
 
 class Continent {
     String name;
-    int population;
+    double population;
 }
 
 public class JDBCApplication extends Application {
@@ -37,30 +34,34 @@ public class JDBCApplication extends Application {
             while (rs.next()) {
                 Continent c = new Continent();
                 c.name = rs.getString("continent");
-                c.population = rs.getInt("bevoelkerung");
+                c.population = rs.getDouble("bevoelkerung");
                 continents.add(c);
             }
 
             rs.close();
             stmt.close();
             con.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
-
-        BarChart<String, Number> barChart = new BarChart<>(new CategoryAxis(), new NumberAxis());
-        barChart.setTitle("Population by Continent");
-        barChart.getXAxis().setLabel("Continent");
-        barChart.getYAxis().setLabel("Population");
 
         XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
         for (Continent continent : continents) {
             dataSeries.getData().add(new XYChart.Data<>(continent.name, continent.population));
         }
-        barChart.getData().add(dataSeries);
 
         FXMLLoader fxmlLoader = new FXMLLoader(JDBCApplication.class.getResource("jdbcview.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 400);
+
+        // GUI mit Daten füllen
+        JDBCController controller = fxmlLoader.getController();
+        controller.setDataSeries(dataSeries);
+
         stage.setTitle("World 2 DB Visualization");
         stage.setScene(scene);
         stage.show();
