@@ -16,7 +16,7 @@ class Continent {
 }
 
 // TODO Wittner: Ermitteln Sie welche Kontinente in der Datenbank enthalten sind.
-//    erstellen Sie für jeden Kontinent eine Chceckbox in der GUI, mit der der Kontinent ein- und ausgeblendet werden kann.
+//    erstellen Sie für jeden Kontinent eine Checkbox in der GUI, mit der der Kontinent ein- und ausgeblendet werden kann.
 //    Stellen Sie im BarChart nur die Kontinente dar, die ausgewählt sind.
 
 public class JDBCApplication extends Application {
@@ -55,17 +55,19 @@ public class JDBCApplication extends Application {
             e.printStackTrace();
         }
 
-        XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
+        XYChart.Series<String, Number> dataSeries1 = new XYChart.Series<>();
         for (Continent continent : continents) {
-            dataSeries.getData().add(new XYChart.Data<>(continent.name, continent.population));
+            dataSeries1.getData().add(new XYChart.Data<>(continent.name, continent.population));
         }
+        String [] continentNames = continents.stream().map(c -> c.name).toArray(String[]::new);
 
         FXMLLoader fxmlLoader = new FXMLLoader(JDBCApplication.class.getResource("jdbcview.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 1500, 600);
 
         // GUI mit Daten füllen
         JDBCController controller = fxmlLoader.getController();
-        controller.setDataSeries(dataSeries);
+        controller.setDataSeries(dataSeries1);
+        controller.createCheckboxes(continentNames);
 
         stage.setTitle("World 2 DB Visualization");
         stage.setScene(scene);
