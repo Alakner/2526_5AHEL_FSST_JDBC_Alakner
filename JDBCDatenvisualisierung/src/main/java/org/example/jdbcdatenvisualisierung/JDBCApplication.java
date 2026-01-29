@@ -59,7 +59,7 @@ public class JDBCApplication extends Application {
         }
         barChart.getData().add(dataSeries);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(JDBCApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(JDBCApplication.class.getResource("jdbcview.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 400);
         stage.setTitle("World 2 DB Visualization");
         stage.setScene(scene);
